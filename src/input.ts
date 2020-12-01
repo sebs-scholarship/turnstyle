@@ -9,6 +9,7 @@ export interface Input {
   continueAfterSeconds: number | undefined;
   abortAfterSeconds: number | undefined;
   sameBranchOnly: boolean;
+  abortOnNewerRun: boolean;
 }
 
 export const parseInput = (env: Record<string, string | undefined>): Input => {
@@ -34,6 +35,7 @@ export const parseInput = (env: Record<string, string | undefined>): Input => {
   }
   const sameBranchOnly =
     env["INPUT_SAME-BRANCH-ONLY"] === "true" || !env["INPUT_SAME-BRANCH-ONLY"]; // true if not specified
+  const abortOnNewerRun = env["INPUT_ABORT-ON-NEWER-RUN"] === "true";
   return {
     githubToken,
     owner,
@@ -45,5 +47,6 @@ export const parseInput = (env: Record<string, string | undefined>): Input => {
     continueAfterSeconds,
     abortAfterSeconds,
     sameBranchOnly,
+    abortOnNewerRun: abortOnNewerRun
   };
 };

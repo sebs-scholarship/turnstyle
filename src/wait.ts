@@ -49,12 +49,25 @@ export class Waiter implements Wait {
       this.input.sameBranchOnly ? this.input.branch : undefined,
       this.workflowId
     );
+
     const previousRuns = runs
       .filter((run) => run.id < this.input.runId)
       .sort((a, b) => b.id - a.id);
     if (!previousRuns || !previousRuns.length) {
       setOutput("force_continued", "");
-      return;
+      return
+    }
+
+    const currentRunIndex = previousRuns.findIndex(
+      ({ id }) => id === this.input.runId
+    );
+
+    if (this.input.abortOnNewerRun && currentRunIndex > 0) {
+      const newerRun = previousRuns[currentRunIndex - 1];
+      this.info(`🛑Newer run ${newerRun.html_url} detected. Aborting...`);
+      throw new Error(
+        `Aborted because newer run ${newerRun.html_url} was detected.`
+      );
     }
 
     const previousRun = previousRuns[0];
