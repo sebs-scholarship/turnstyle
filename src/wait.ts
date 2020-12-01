@@ -55,7 +55,7 @@ export class Waiter implements Wait {
       .sort((a, b) => b.id - a.id);
     if (!previousRuns || !previousRuns.length) {
       setOutput("force_continued", "");
-      return
+      return;
     }
 
     const currentRunIndex = previousRuns.findIndex(

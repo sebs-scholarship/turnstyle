@@ -47,6 +47,6 @@ export const parseInput = (env: Record<string, string | undefined>): Input => {
     continueAfterSeconds,
     abortAfterSeconds,
     sameBranchOnly,
-    abortOnNewerRun: abortOnNewerRun
+    abortOnNewerRun: abortOnNewerRun,
   };
 };

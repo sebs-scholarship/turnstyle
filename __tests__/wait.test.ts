@@ -25,7 +25,7 @@ describe("wait", () => {
           runId: 2,
           workflowName: workflow.name,
           sameBranchOnly: true,
-          abortOnNewerRun: false
+          abortOnNewerRun: false,
         };
       });
 
@@ -35,13 +35,13 @@ describe("wait", () => {
           {
             id: 1,
             status: "in_progress",
-            html_url: ""
+            html_url: "",
           },
           {
             id: 2,
             status: "in_progress",
-            html_url: ""
-          }
+            html_url: "",
+          },
         ];
         const githubClient = {
           runs: async (
@@ -76,13 +76,13 @@ describe("wait", () => {
           {
             id: 1,
             status: "in_progress",
-            html_url: ""
+            html_url: "",
           },
           {
             id: 2,
             status: "in_progress",
-            html_url: ""
-          }
+            html_url: "",
+          },
         ];
         const githubClient = {
           runs: async (
@@ -123,7 +123,7 @@ describe("wait", () => {
         const run2: Run = {
           id: 2,
           status: "in_progress",
-          html_url: ""
+          html_url: "",
         };
 
         const mockedRunsFunc = jest
@@ -164,18 +164,18 @@ describe("wait", () => {
           {
             id: 3,
             status: "in_progress",
-            html_url: "3"
+            html_url: "3",
           },
           {
             id: 4,
             status: "in_progress",
-            html_url: "4"
+            html_url: "4",
           },
           {
             id: 5,
             status: "in_progress",
-            html_url: "5"
-          }
+            html_url: "5",
+          },
         ];
         // Give the current run an id that makes it the last in the queue.
         input.runId = inProgressRuns.length + 1;
@@ -220,17 +220,17 @@ describe("wait", () => {
         const previousRun = {
           id: 1,
           status: "in_progress",
-          html_url: "url_1"
+          html_url: "url_1",
         };
         const currentRun = {
           id: 2,
           status: "in_progress",
-          html_url: "url_2"
+          html_url: "url_2",
         };
         const newerRun = {
           id: 3,
           status: "in_progress",
-          html_url: "url_3"
+          html_url: "url_3",
         };
         input.runId = currentRun.id;
         input.abortOnNewerRun = true;
@@ -243,7 +243,7 @@ describe("wait", () => {
         const githubClient = {
           runs: mockedRunsFunc,
           workflows: async (owner: string, repo: string) =>
-            Promise.resolve([workflow])
+            Promise.resolve([workflow]),
         };
 
         const messages: Array<string> = [];
@@ -260,7 +260,7 @@ describe("wait", () => {
         );
         expect(messages).toEqual([
           "✋Awaiting run url_1 ...",
-          "🛑Newer run url_3 detected. Aborting..."
+          "🛑Newer run url_3 detected. Aborting...",
         ]);
       });
 
@@ -268,17 +268,17 @@ describe("wait", () => {
         const previousRun = {
           id: 1,
           status: "in_progress",
-          html_url: "url_1"
+          html_url: "url_1",
         };
         const currentRun = {
           id: 2,
           status: "in_progress",
-          html_url: "url_2"
+          html_url: "url_2",
         };
         const newerRun = {
           id: 3,
           status: "in_progress",
-          html_url: "url_3"
+          html_url: "url_3",
         };
         input.runId = currentRun.id;
         input.abortOnNewerRun = true;
@@ -291,7 +291,7 @@ describe("wait", () => {
         const githubClient = {
           runs: mockedRunsFunc,
           workflows: async (owner: string, repo: string) =>
-            Promise.resolve([workflow])
+            Promise.resolve([workflow]),
         };
 
         const messages: Array<string> = [];
