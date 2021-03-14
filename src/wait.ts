@@ -50,20 +50,17 @@ export class Waiter implements Wait {
       this.workflowId
     );
 
-    const previousRuns = runs
-      .filter((run) => run.id < this.input.runId)
-      .sort((a, b) => b.id - a.id);
+    const sortedRuns = runs.sort((a, b) => b.id - a.id);
+    const previousRuns = sortedRuns.filter((run) => run.id < this.input.runId);
+
     if (!previousRuns || !previousRuns.length) {
       setOutput("force_continued", "");
       return;
     }
 
-    const currentRunIndex = previousRuns.findIndex(
-      ({ id }) => id === this.input.runId
-    );
-
-    if (this.input.abortOnNewerRun && currentRunIndex > 0) {
-      const newerRun = previousRuns[currentRunIndex - 1];
+    const nextRuns = sortedRuns.filter((run) => run.id > this.input.runId);
+    if (this.input.abortOnNewerRun && nextRuns.length > 0) {
+      const newerRun = nextRuns[0];
       this.info(`🛑Newer run ${newerRun.html_url} detected. Aborting...`);
       throw new Error(
         `Aborted because newer run ${newerRun.html_url} was detected.`
