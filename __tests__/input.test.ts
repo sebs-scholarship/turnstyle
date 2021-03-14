@@ -14,6 +14,7 @@ describe("input", () => {
           "INPUT_CONTINUE-AFTER-SECONDS": "10",
           "INPUT_POLL-INTERVAL-SECONDS": "5",
           "INPUT_SAME-BRANCH-ONLY": "false",
+          "INPUT_ABORT-ON-NEWER-RUN": "true",
         }),
         {
           githubToken: "s3cr3t",
@@ -26,6 +27,7 @@ describe("input", () => {
           abortAfterSeconds: undefined,
           pollIntervalSeconds: 5,
           sameBranchOnly: false,
+          abortOnNewerRun: true,
         }
       );
     });
@@ -41,6 +43,7 @@ describe("input", () => {
           "INPUT_ABORT-AFTER-SECONDS": "10",
           "INPUT_POLL-INTERVAL-SECONDS": "5",
           "INPUT_SAME-BRANCH-ONLY": "false",
+          "INPUT_ABORT-ON-NEWER-RUN": "true",
         }),
         {
           githubToken: "s3cr3t",
@@ -53,6 +56,7 @@ describe("input", () => {
           abortAfterSeconds: 10,
           pollIntervalSeconds: 5,
           sameBranchOnly: false,
+          abortOnNewerRun: true,
         }
       );
     });
@@ -82,6 +86,7 @@ describe("input", () => {
           "INPUT_CONTINUE-AFTER-SECONDS": "",
           "INPUT_POLL-INTERVAL-SECONDS": "",
           "INPUT_SAME-BRANCH-ONLY": "",
+          INPUT_ABORT_IF_NEWER: "",
         }),
         {
           githubToken: "s3cr3t",
@@ -94,6 +99,7 @@ describe("input", () => {
           abortAfterSeconds: undefined,
           pollIntervalSeconds: 60,
           sameBranchOnly: true,
+          abortOnNewerRun: false,
         }
       );
     });
@@ -119,6 +125,7 @@ describe("input", () => {
           abortAfterSeconds: undefined,
           pollIntervalSeconds: 60,
           sameBranchOnly: true,
+          abortOnNewerRun: false,
         }
       );
     });
