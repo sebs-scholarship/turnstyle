@@ -66,15 +66,16 @@ export class OctokitGitHub implements GitHub {
       owner,
       repo,
       workflow_id,
-      status: "in_progress",
     };
 
     if (branch) {
       options.branch = branch;
     }
 
-    return this.octokit.paginate(
-      this.octokit.actions.listWorkflowRuns.endpoint.merge(options)
-    );
+    return this.octokit
+      .paginate(this.octokit.actions.listWorkflowRuns.endpoint.merge(options))
+      .then((runs) =>
+        runs.filter((run) => ["in_progress", "queued"].includes(run.status))
+      );
   };
 }
